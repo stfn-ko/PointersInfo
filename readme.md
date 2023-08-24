@@ -2,16 +2,16 @@
 
 ## Table of contents
 
-["Reviewing the basic terminology"](#reviewing-the-basic-terminology)
-["A pointer scenario"](#a-pointer-scenario)
-["Dereferencing the pointer"](#dereferencing-the-pointer)
-["Dereferencing and accessing a structure data member"](#dereferencing-and-accessing-a-structure-data-member)
-["Multi byte data types"](#multi-byte-data-types)
-["Pointers to dynamically allocated memory"](#pointers-to-dynamically-allocated-memory)
-["Losing and leaking addresses"](#losing-and-leaking-addresses)
-["C++ smart pointers"](#c-smart-pointers)
-["Null pointers"](#null-pointers)
-["More about memory addresses and why you probably dont need to know"](#more-about-memory-addresses-and-why-you-probably-dont-need-to-know)
+- [Reviewing the basic terminology](#reviewing-the-basic-terminology)
+- [A pointer scenario](#a-pointer-scenario)
+- [Dereferencing the pointer](#dereferencing-the-pointer)
+- [Dereferencing and accessing a structure data member](#dereferencing-and-accessing-a-structure-data-member)
+- [Multi byte data types](#multi-byte-data-types)
+- [Pointers to dynamically allocated memory](#pointers-to-dynamically-allocated-memory)
+- [Losing and leaking addresses](#losing-and-leaking-addresses)
+- [C++ smart pointers](#c-smart-pointers)
+- [Null pointers](#null-pointers)
+- [More about memory addresses and why you probably dont need to know](#more-about-memory-addresses-and-why-you-probably-dont-need-to-know)
 
 > _Author: Tony Delroy | Editor: Stephan Kolontay_
 
@@ -165,7 +165,7 @@ free(p);
 
 ## C++ smart pointers
 
-In C++, it's best practice to use ["smart pointer"](http://en.wikipedia.org/wiki/Smart_pointer) objects to store and manage the pointers, automatically deallocating them when the smart pointers' destructors run. Since C++11 the Standard Library provides two, [`unique_ptr`](http://en.cppreference.com/w/cpp/memory/unique_ptr) for when there's a single owner for an allocated object...
+In C++, it's best practice to use [smart pointer](http://en.wikipedia.org/wiki/Smart_pointer) objects to store and manage the pointers, automatically deallocating them when the smart pointers' destructors run. Since C++11 the Standard Library provides two, [`unique_ptr`](http://en.cppreference.com/w/cpp/memory/unique_ptr) for when there's a single owner for an allocated object...
 
 ```C++
 {
@@ -175,7 +175,7 @@ In C++, it's best practice to use ["smart pointer"](http://en.wikipedia.org/wiki
 } // p's destructor's guaranteed to run "here", calling delete
 ```
 
-...and [`shared_ptr`](http://en.cppreference.com/w/cpp/memory/shared_ptr) for share ownership (using ["reference counting"](http://en.wikipedia.org/wiki/Reference_counting))...
+...and [`shared_ptr`](http://en.cppreference.com/w/cpp/memory/shared_ptr) for share ownership (using [reference counting](http://en.wikipedia.org/wiki/Reference_counting))...
 
 ```C++
 {
@@ -205,7 +205,7 @@ Further, when you assign `0`, `NULL` and `nullptr` to a pointer the bits in the 
 
 ## More about memory addresses, and why you probably don't need to know
 
-More strictly, initialised pointers store a bit-pattern identifying either `NULL` or a (often ["virtual"](http://en.wikipedia.org/wiki/Virtual_address_space)) memory address.
+More strictly, initialised pointers store a bit-pattern identifying either `NULL` or a (often [virtual](http://en.wikipedia.org/wiki/Virtual_address_space)) memory address.
 
 The simple case is where this is a numeric offset into the process's entire virtual address space; in more complex cases the pointer may be relative to some specific memory area, which the CPU may select based on CPU "segment" registers or some manner of segment id encoded in the bit-pattern, and/or looking in different places depending on the machine code instructions using the address.
 
