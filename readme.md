@@ -2,16 +2,16 @@
 
 ## Table of contents
 
-- [Reviewing the basic terminology](#reviewing-the-basic-terminology)
-- [A pointer scenario](#a-pointer-scenario)
-- [Dereferencing the pointer](#dereferencing-the-pointer)
-- [Dereferencing and accessing a structure data member](#dereferencing-and-accessing-a-structure-data-member)
-- [Multi byte data types](#multi-byte-data-types)
-- [Pointers to dynamically allocated memory](#pointers-to-dynamically-allocated-memory)
-- [Losing and leaking addresses](#losing-and-leaking-addresses)
-- [C++ smart pointers](#c-smart-pointers)
-- [Null pointers](#null-pointers)
-- [More about memory addresses and why you probably dont need to know](#more-about-memory-addresses-and-why-you-probably-dont-need-to-know)
+1. [Reviewing the basic terminology](#reviewing-the-basic-terminology)
+2. [A pointer scenario](#a-pointer-scenario)
+3. [Dereferencing the pointer](#dereferencing-the-pointer)
+4. [Dereferencing and accessing a structure data member](#dereferencing-and-accessing-a-structure-data-member)
+5. [Multi byte data types](#multi-byte-data-types)
+6. [Pointers to dynamically allocated memory](#pointers-to-dynamically-allocated-memory)
+7. [Losing and leaking addresses](#losing-and-leaking-addresses)
+8. [C++ smart pointers](#c-smart-pointers)
+9. [Null pointers](#null-pointers)
+10. [More about memory addresses and why you probably dont need to know](#more-about-memory-addresses-and-why-you-probably-dont-need-to-know)
 
 > _Author: Tony Delroy | Editor: Stephan Kolontay_
 
