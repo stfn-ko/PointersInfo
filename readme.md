@@ -1,5 +1,7 @@
 # C/C++ Pointers
 
+> _Author: Tony Delroy | Editor: Stephan Kolontay_
+
 ## Table of contents
 
 - [Reviewing the basic terminology](#reviewing-the-basic-terminology)
@@ -12,8 +14,6 @@
 - [C++ smart pointers](#c-smart-pointers)
 - [Null pointers](#null-pointers)
 - [More about memory addresses and why you probably dont need to know](#more-about-memory-addresses-and-why-you-probably-dont-need-to-know)
-
-> _Author: Tony Delroy | Editor: Stephan Kolontay_
 
 ## Reviewing the basic terminology
 
