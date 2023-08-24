@@ -1,6 +1,19 @@
 # C/C++ Pointers
 
-*Author: Tony Delroy | Editor: Stephan Kolontay*
+## Table of contents
+
+["Reviewing the basic terminology"](#reviewing-the-basic-terminology)
+["A pointer scenario"](#a-pointer-scenario)
+["Dereferencing the pointer"](#dereferencing-the-pointer)
+["Dereferencing and accessing a structure data member"](#dereferencing-and-accessing-a-structure-data-member)
+["Multi byte data types"](#multi-byte-data-types)
+["Pointers to dynamically allocated memory"](#pointers-to-dynamically-allocated-memory)
+["Losing and leaking addresses"](#losing-and-leaking-addresses)
+["C++ smart pointers"](#c-smart-pointers)
+["Null pointers"](#null-pointers)
+["More about memory addresses and why you probably dont need to know"](#more-about-memory-addresses-and-why-you-probably-dont-need-to-know)
+
+> _Author: Tony Delroy | Editor: Stephan Kolontay_
 
 ## Reviewing the basic terminology
 
@@ -21,11 +34,11 @@ Consider in C, given a pointer such as p below...
 const char* p = "abc";
 ```
 
-...four bytes with the numerical values used to encode the letters 'a', 'b', 'c', and a 0 byte to denote the end of the textual data, are stored somewhere in memory and the numerical address of that data is stored in ```p```. This way C encodes text in memory is known as ["ASCIIZ"](https://en.wikipedia.org/wiki/Null-terminated_string).
+...four bytes with the numerical values used to encode the letters 'a', 'b', 'c', and a 0 byte to denote the end of the textual data, are stored somewhere in memory and the numerical address of that data is stored in `p`. This way C encodes text in memory is known as ["ASCIIZ"](https://en.wikipedia.org/wiki/Null-terminated_string).
 
-For example, if the string literal happened to be at address 0x1000 and ```p``` a 32-bit pointer at 0x2000, the memory content would be:
+For example, if the string literal happened to be at address 0x1000 and `p` a 32-bit pointer at 0x2000, the memory content would be:
 
-```
+```C++
 Memory Address (hex)    Variable name    Contents
 1000                                     'a' == 97 (ASCII)
 1001                                     'b' == 98
@@ -35,11 +48,11 @@ Memory Address (hex)    Variable name    Contents
 2000-2003               p                1000 hex
 ```
 
-Note that there is no variable name/identifier for address 0x1000, but we can indirectly refer to the string literal using a pointer storing its address: ```p```.
+Note that there is no variable name/identifier for address 0x1000, but we can indirectly refer to the string literal using a pointer storing its address: `p`.
 
 ## Dereferencing the pointer
 
-To refer to the characters p points to, we dereference ```p``` using one of these notations (again, for C):
+To refer to the characters p points to, we dereference `p` using one of these notations (again, for C):
 
 ```C++
 assert(*p == 'a');  // The first character at address p will be 'a'
@@ -65,11 +78,11 @@ int* p_x = &x;  // Put the address of the x variable into the pointer p_x
 assert(x == 4); // Check x is now 4
 ```
 
-Above, you must have known at compile time that you would need a variable called ```x```, and the code asks the compiler to arrange where it should be stored, ensuring the address will be available via ```&x```.
+Above, you must have known at compile time that you would need a variable called `x`, and the code asks the compiler to arrange where it should be stored, ensuring the address will be available via `&x`.
 
 ## Dereferencing and accessing a structure data member
 
-In C, if you have a variable that is a pointer to a structure with data members, you can access those members using the ```->``` dereferencing operator:
+In C, if you have a variable that is a pointer to a structure with data members, you can access those members using the `->` dereferencing operator:
 
 ```C++
 typedef struct X { int i_; double d_; } X;
@@ -109,7 +122,7 @@ fn(*p);             // Call a function, passing it the value at address p
 free(p);            // Release the memory back to the heap allocation library
 ```
 
-In C++, memory allocation is normally done with the new operator, and deallocation with ```delete```:
+In C++, memory allocation is normally done with the new operator, and deallocation with `delete`:
 
 ```C++
 int* p = new int(10); // Memory for one int with initial value 10
@@ -126,7 +139,7 @@ See also ["C++ smart pointers"](#c-smart-pointers) below.
 
 ## Losing and leaking addresses
 
-Often a pointer may be the only indication of where some data or buffer exists in memory. If ongoing use of that data/buffer is needed, or the ability to call ```free()``` or ```delete``` to avoid leaking the memory, then the programmer must operate on a copy of the pointer...
+Often a pointer may be the only indication of where some data or buffer exists in memory. If ongoing use of that data/buffer is needed, or the ability to call `free()` or `delete` to avoid leaking the memory, then the programmer must operate on a copy of the pointer...
 
 ```C++
 const char* p = asprintf("name: %s", name);  // Common but non-Standard printf-on-heap
@@ -152,7 +165,7 @@ free(p);
 
 ## C++ smart pointers
 
-In C++, it's best practice to use ["smart pointer"](http://en.wikipedia.org/wiki/Smart_pointer) objects to store and manage the pointers, automatically deallocating them when the smart pointers' destructors run. Since C++11 the Standard Library provides two, [```unique_ptr```](http://en.cppreference.com/w/cpp/memory/unique_ptr) for when there's a single owner for an allocated object...
+In C++, it's best practice to use ["smart pointer"](http://en.wikipedia.org/wiki/Smart_pointer) objects to store and manage the pointers, automatically deallocating them when the smart pointers' destructors run. Since C++11 the Standard Library provides two, [`unique_ptr`](http://en.cppreference.com/w/cpp/memory/unique_ptr) for when there's a single owner for an allocated object...
 
 ```C++
 {
@@ -162,7 +175,7 @@ In C++, it's best practice to use ["smart pointer"](http://en.wikipedia.org/wiki
 } // p's destructor's guaranteed to run "here", calling delete
 ```
 
-...and [```shared_ptr```](http://en.cppreference.com/w/cpp/memory/shared_ptr) for share ownership (using ["reference counting"](http://en.wikipedia.org/wiki/Reference_counting))...
+...and [`shared_ptr`](http://en.cppreference.com/w/cpp/memory/shared_ptr) for share ownership (using ["reference counting"](http://en.wikipedia.org/wiki/Reference_counting))...
 
 ```C++
 {
@@ -173,9 +186,9 @@ In C++, it's best practice to use ["smart pointer"](http://en.wikipedia.org/wiki
 
 ## Null pointers
 
-In C, ```NULL``` and ```0``` - and additionally in C++ ```nullptr``` - can be used to indicate that a pointer doesn't currently hold the memory address of a variable, and shouldn't be dereferenced or used in pointer arithmetic. For example:
+In C, `NULL` and `0` - and additionally in C++ `nullptr` - can be used to indicate that a pointer doesn't currently hold the memory address of a variable, and shouldn't be dereferenced or used in pointer arithmetic. For example:
 
-``` C++
+```C++
 const char* p_filename = NULL; // Or "= 0", or "= nullptr" in C++
 int c;
 while ((c = getopt(argc, argv, "f:")) != -1)
@@ -186,16 +199,17 @@ if (p_filename)  // Only NULL converts to false
     ...   // Only get here if -f flag specified
 ```
 
-In C and C++, just as inbuilt numeric types don't necessarily default to ```0```, nor ```bools``` to ```false```, pointers are not always set to ```NULL```. All these are set to ```0```/```false```/```NULL``` when they're static variables or (C++ only) direct or indirect member variables of static objects or their bases, or undergo zero initialisation (e.g. ```new T();``` and ```new T(x, y, z);``` perform zero-initialisation on T's members including pointers, whereas ```new T;``` does not).
+In C and C++, just as inbuilt numeric types don't necessarily default to `0`, nor `bools` to `false`, pointers are not always set to `NULL`. All these are set to `0`/`false`/`NULL` when they're static variables or (C++ only) direct or indirect member variables of static objects or their bases, or undergo zero initialisation (e.g. `new T();` and `new T(x, y, z);` perform zero-initialisation on T's members including pointers, whereas `new T;` does not).
 
-Further, when you assign ```0```, ```NULL``` and ```nullptr``` to a pointer the bits in the pointer are not necessarily all reset: the pointer may not contain "0" at the hardware level, or refer to address 0 in your virtual address space. The compiler is allowed to store something else there if it has reason to, but whatever it does - if you come along and compare the pointer to ```0```, ```NULL```, ```nullptr``` or another pointer that was assigned any of those, the comparison must work as expected. So, below the source code at the compiler level, ```NULL``` is potentially a bit "magical" in the C and C++ languages...
+Further, when you assign `0`, `NULL` and `nullptr` to a pointer the bits in the pointer are not necessarily all reset: the pointer may not contain "0" at the hardware level, or refer to address 0 in your virtual address space. The compiler is allowed to store something else there if it has reason to, but whatever it does - if you come along and compare the pointer to `0`, `NULL`, `nullptr` or another pointer that was assigned any of those, the comparison must work as expected. So, below the source code at the compiler level, `NULL` is potentially a bit "magical" in the C and C++ languages...
 
 ## More about memory addresses, and why you probably don't need to know
-More strictly, initialised pointers store a bit-pattern identifying either ```NULL``` or a (often ["virtual"](http://en.wikipedia.org/wiki/Virtual_address_space)) memory address.
+
+More strictly, initialised pointers store a bit-pattern identifying either `NULL` or a (often ["virtual"](http://en.wikipedia.org/wiki/Virtual_address_space)) memory address.
 
 The simple case is where this is a numeric offset into the process's entire virtual address space; in more complex cases the pointer may be relative to some specific memory area, which the CPU may select based on CPU "segment" registers or some manner of segment id encoded in the bit-pattern, and/or looking in different places depending on the machine code instructions using the address.
 
-For example, an ```int*``` properly initialised to point to an int variable might - after casting to a ```float*``` - access memory in "GPU" memory quite distinct from the memory where the int variable is, then once cast to and used as a function pointer it might point into further distinct memory holding machine opcodes for the program (with the numeric value of the ```int* ``` effectively a random, invalid pointer within these other memory regions).
+For example, an `int*` properly initialised to point to an int variable might - after casting to a `float*` - access memory in "GPU" memory quite distinct from the memory where the int variable is, then once cast to and used as a function pointer it might point into further distinct memory holding machine opcodes for the program (with the numeric value of the `int* ` effectively a random, invalid pointer within these other memory regions).
 
 3GL programming languages like C and C++ tend to hide this complexity, such that:
 
